@@ -10,8 +10,8 @@ class HomeController {
 
     @RequestMapping
     ModelAndView indexPage() {
-        ModelAndView mnv = new ModelAndView("index");
-       return mnv;
+        ModelAndView mnv = new ModelAndView("home");
+        return mnv;
     }
 
 }
