@@ -1,9 +1,8 @@
-package com.example.start.start.controller;
+package com.sda.meetup.controller;
 
-import com.example.start.start.Size;
-import com.example.start.start.dto.UserRegistrationDto;
-import com.example.start.start.entity.User;
-import com.example.start.start.service.UserService;
+import com.sda.meetup.dto.RegistrationDto;
+import com.sda.meetup.entity.User;
+import com.sda.meetup.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,18 +13,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
-import java.util.*;
 
 @Controller
 @RequestMapping("/registration")
-public class UserRegistrationController {
+public class RegistrationController {
 
     @Autowired
     private UserService userService;
 
     @ModelAttribute("user")
-    public UserRegistrationDto userRegistrationDto() {
-        return new UserRegistrationDto();
+    public RegistrationDto userRegistrationDto() {
+        return new RegistrationDto();
     }
 
     @GetMapping
@@ -34,7 +32,7 @@ public class UserRegistrationController {
     }
 
     @PostMapping
-    public String registerUserAccount(@ModelAttribute("user") @Valid UserRegistrationDto userDto,
+    public String registerUserAccount(@ModelAttribute("user") @Valid RegistrationDto userDto,
                                       BindingResult result){
 
         User existing = userService.findByEmail(userDto.getEmail());
