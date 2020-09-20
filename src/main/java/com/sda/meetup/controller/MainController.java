@@ -5,14 +5,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/")
-class HomeController {
+@RequestMapping("/login")
+class MainController {
 
     @RequestMapping
-    ModelAndView indexPage() {
-        ModelAndView mnv = new ModelAndView("index");
+    ModelAndView loginPage() {
+        ModelAndView mnv = new ModelAndView("login");
         return mnv;
     }
 
 }
-
