@@ -4,7 +4,7 @@
 <head>
     <style>
         body {
-            background-image: url('https://pixabay.com/get/57e2d54b4850a514eade837bc2203079083ed8e55354754d732878.jpg');
+            background-image: url('https://iili.io/2TBvAQ.jpg');
             background-repeat: no-repeat;
             background-attachment: fixed;
             background-size: cover;
@@ -23,11 +23,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
 <div th:fragment="navbar">
-    <nav class="navbar navbar-inverse">
+    <nav class="navbar navbar-inverse bg-dark navbar-dark">
         <div class="container-fluid">
             <div class="navbar-header">
                 <a class="navbar-brand" href="#">Meetup</a>
@@ -37,7 +38,7 @@
             </ul>
             <ul class="nav navbar-nav" sec:authorize="isAuthenticated()">
                 <li class="active"><a href="#">Home</a></li>
-                <li><a href="#">Personal Calendar</a></li>
+                <li><a href="#" th:href="@{/personal-calendar}" th:inline="text">Personal Calendar</a></li>
                 <li><a href="#">Friend's Plans</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right" sec:authorize="isAnonymous()">
