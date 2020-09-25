@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 
 import javax.validation.Valid;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
@@ -38,6 +39,7 @@ public class UserServiceImpl implements UserService {
         user.setLastName(registration.getLastName());
         user.setEmail(registration.getEmail());
         user.setPassword(passwordEncoder.encode(registration.getPassword()));
+        user.setRoles(Arrays.asList(new Role("ROLE_USER")));
         return userRepository.save(user);
     }
 

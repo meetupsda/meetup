@@ -18,27 +18,29 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private UserService userService;
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
+    protected void configure(final HttpSecurity http) throws Exception {
         http
+                .csrf().disable()
                 .authorizeRequests()
-                .antMatchers(
-                        "/registration**",
-                        "/js/**",
-                        "/css/**",
-                        "/img/**",
-                        "/webjars/**").permitAll()
+                .antMatchers("/").permitAll()
+                .antMatchers("/registration").anonymous()
+                .antMatchers("/login").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
-                .permitAll()
+                .defaultSuccessUrl("/", true)
+                //.failureUrl("/login.html?error=true")
                 .and()
                 .logout()
+               /* .logoutUrl("/perform_logout")
+                .deleteCookies("JSESSIONID");*/
                 .invalidateHttpSession(true)
                 .clearAuthentication(true)
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/login?logout")
                 .permitAll();
+
     }
 
     @Bean

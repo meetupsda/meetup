@@ -2,15 +2,17 @@ package com.sda.meetup.dto;
 
 
 
+import com.sda.meetup.constraint.FieldMatch;
+
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 
-/*@FieldMatch.List({
+@FieldMatch.List({
         @FieldMatch(first = "password", second = "confirmPassword", message = "The password fields must match"),
         @FieldMatch(first = "email", second = "confirmEmail", message = "The email fields must match")
-})*/
+})
 public class RegistrationDto {
 
     @NotEmpty(message = "")
