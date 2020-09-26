@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <style>
+        body {
+            background-image: url('https://iili.io/2TBvAQ.jpg');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .topnav {
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        .topnav a {
+            float: left;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 15px 17px;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        .topnav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        .topnav a.active {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .topnav-right {
+            float: right;
+        }
+
+        .navbar-brand {
+            float: left;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 12px 14px;
+            text-decoration: none;
+            font-size: 15px;
+        }
+    </style>
+    <title>Add event</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link th:rel="stylesheet" th:href="@{/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.css}"/>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+    <link th:rel="stylesheet" th:href="@{/webjars/font-awesome/5.11.2/css/all.css} "/>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-4 mt-5">
+            <form method="post" th:object="${event}">
+
+                <div class="form-group">
+                    <label for="id">User id:</label>
+                    <input type="text" id="id" placeholder="User id" autocomplete="off" class="form-control"
+                           th:field="*{id}"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="event">Description:</label>
+                    <input type="text" rows="2" id="event" placeholder="Event description - add your personal notes" autocomplete="off" class="form-control"
+                           th:field="*{description}"/>
+                </div>
+                <div class="form-group">
+                    <label for="date">Start Date & Time:</label>
+                    <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+                        <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1"
+                               th:field="*{date}" id="date" placeholder="Start Date & Time"/>
+                        <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+                            <div class="input-group-text"><i class="fa fa-calendar-alt"></i></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="date2">End Date & Time:</label>
+                    <div class="input-group date2" id="datetimepicker2" data-target-input="nearest">
+                        <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker2"
+                               th:field="*{date2}" id="date2" placeholder="End Date & Time"/>
+                        <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
+                            <div class="input-group-text"><i class="fa fa-calendar-alt"></i></div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary" type="submit">Submit form</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/moment.min.js}"></script>
+<script th:src="@{/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.js}"></script>
+
+<script>
+    $.fn.datetimepicker.Constructor.Default = $.extend({}, $.fn.datetimepicker.Constructor.Default, {
+        icons: {
+            time: 'far fa-clock',
+            date: 'far fa-calendar',
+            up: 'fas fa-arrow-up',
+            down: 'fas fa-arrow-down',
+            previous: 'fas fa-chevron-left',
+            next: 'fas fa-chevron-right',
+            today: 'far fa-calendar-check-o',
+            clear: 'far fa-trash',
+            close: 'far fa-times'
+        } });
+
+    $('#datetimepicker1').datetimepicker({
+        format: 'DD/MM/YYYY h:mm A'
+    });
+
+    $('#datetimepicker2').datetimepicker({
+        format: 'DD/MM/YYYY h:mm A'
+    });
+</script>
+</body>
+</html>
