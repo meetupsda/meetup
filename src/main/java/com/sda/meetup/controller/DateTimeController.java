@@ -1,32 +1,31 @@
 package com.sda.meetup.controller;
 
-import com.sda.meetup.component.DateTimeEntry;
+import com.sda.meetup.entity.DateTimeEntry;
 import com.sda.meetup.service.DateTimeEntryService;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
-@RequestMapping("/enterdatetime")
 public class DateTimeController {
 
-    private final DateTimeEntry dateTimeEntry;
+    private final DateTimeEntryService dateTimeEntryService;
 
-    public DateTimeController(DateTimeEntry dateTimeEntry) {
-        this.dateTimeEntry = dateTimeEntry;
+    public DateTimeController(DateTimeEntryService dateTimeEntryService) {
+        this.dateTimeEntryService = dateTimeEntryService;
     }
 
-    @RequestMapping
-    ModelAndView ProposeDateTimePage() {
-        ModelAndView mnv = new ModelAndView("dateTimeEntry");
-        //TODO dodać obiekt??
-        return mnv;
+    @GetMapping("/adddate")
+    public String submitDateTimeForm(Model model) {
+        model.addAttribute("dateTimeEntry", new DateTimeEntry());
+        return "addDateTimeEntry";
     }
 
-//    @RequestMapping(method = RequestMethod.POST)
-//    String addNewProduct(NewProductDTO productDTO) {
-//        DateTimeEntryService.addDateTimeEntry(dateTimeEntry);
-//        return "redirect:/products";
-//    }
+    @PostMapping ("/adddate")
+    public String saveDateTime(DateTimeEntry dateTimeEntry, Model model) {
+        model.addAttribute("dateTimeEntry", dateTimeEntry);
+        return "savedDateTimeEntry";
+    }
+
 }
