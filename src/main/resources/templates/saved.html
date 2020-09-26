@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <style>
+        body {
+            background-image: url('https://iili.io/2TBvAQ.jpg');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .topnav {
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        .topnav a {
+            float: left;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 15px 17px;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        .topnav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        .topnav a.active {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .topnav-right {
+            float: right;
+        }
+
+        .navbar-brand {
+            float: left;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 12px 14px;
+            text-decoration: none;
+            font-size: 15px;
+        }
+    </style>
+    <title>Meetup</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="topnav">
+    <a class="navbar-brand" href="#">Meetup</a>
+    <a th:href="@{/}">Home</a>
+    <a th:href="@{/personal-calendar}">Personal Calendar</a>
+    <a th:href="@{/friends-plans}">Friend's Plans</a>
+    <div class="topnav-right" sec:authorize="isAnonymous()">
+        <a href="#" th:href="@{/registration}" th:inline="text"><span class="glyphicon glyphicon-user"></span> Sign
+            Up</a>
+        <a href="#" th:href="@{/login}" th:inline="text"><span class="glyphicon glyphicon-log-in"></span> Login</a>
+    </div>
+    <div class="topnav-right" sec:authorize="isAuthenticated()">
+        <a href="#" th:href="@{/profile}" th:inline="text"><span class="glyphicon glyphicon-user"></span> Profile</a>
+        <a href="#" th:href="@{/logout}" th:inline="text"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
+    </div>
+</div>
+
+<div class="container-fluid", style="padding-left: 100px">
+    <h2 class="mt-5 mb-2">Event submitted</h2>
+
+    <p><label>Title: </label> <strong th:text="${event.title}"></strong></p>
+    <p><label>Description: </label> <strong th:text="${event.description}"></strong></p>
+    <p><label>Time: </label> <strong th:text="${event.time}"></strong></p>
+
+    <a th:href="@{/personal-calendar}" class="btn btn-primary">Go back</a>
+</div>
+
+</body>
+</html>
