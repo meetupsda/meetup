@@ -61,16 +61,31 @@
 </head>
 
 <body>
-
+<div class="topnav">
+    <a class="navbar-brand" href="#">Meetup</a>
+    <a th:href="@{/}">Home</a>
+    <a th:href="@{/personal-calendar}">Personal Calendar</a>
+    <a th:href="@{/addevent}">Add event</a>
+    <a th:href="@{/friends-plans}">Friend's Plans</a>
+    <div class="topnav-right" sec:authorize="isAnonymous()">
+        <a href="#" th:href="@{/registration}" th:inline="text"><span class="glyphicon glyphicon-user"></span> Sign
+            Up</a>
+        <a href="#" th:href="@{/login}" th:inline="text"><span class="glyphicon glyphicon-log-in"></span> Login</a>
+    </div>
+    <div class="topnav-right" sec:authorize="isAuthenticated()">
+        <a href="#" th:href="@{/profile}" th:inline="text"><span class="glyphicon glyphicon-user"></span> Profile</a>
+        <a href="#" th:href="@{/logout}" th:inline="text"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
+    </div>
+</div>
 <div class="container">
-
+    <h2 class="mt-5 mb-2">When can you meet? </h2>
     <div class="row">
         <div class="col-md-4 mt-5">
             <form method="post" th:object="${event}">
 
                 <div class="form-group">
                     <label for="id">User id:</label>
-                    <input type="text" id="id" placeholder="User id" autocomplete="off" class="form-control"
+                    <input type="number" id="id" placeholder="User id - numerical only" autocomplete="off" class="form-control"
                            th:field="*{id}"/>
                 </div>
 
