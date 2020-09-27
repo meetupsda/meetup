@@ -1,29 +1,47 @@
 package com.sda.meetup.entity;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
-public class Event {
+@Entity
+@Table(name = "EVENTS")
+@AllArgsConstructor
+public class EventEntity {
 
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     private String description;
+
     @DateTimeFormat(pattern = "dd/MM/yyyy h:mm a")
     private LocalDateTime date;
+
     @DateTimeFormat(pattern = "dd/MM/yyyy h:mm a")
     private LocalDateTime date2;
 
-        public Event(Long id, String description, LocalDateTime date, LocalDateTime date2) {
-        this.id = id;
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    private Long userId;
+
+    public EventEntity(String description, LocalDateTime date, LocalDateTime date2, Long userId) {
         this.description = description;
         this.date = date;
         this.date2 = date2;
+        this.userId = userId;
     }
 
-    public Event() {
+    public EventEntity() {
     }
 
     public Long getId() {
@@ -57,4 +75,8 @@ public class Event {
     public void setDate2(LocalDateTime date2) {
         this.date2 = date2;
     }
+
 }
+
+
+

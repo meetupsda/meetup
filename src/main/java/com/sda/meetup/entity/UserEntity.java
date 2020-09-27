@@ -1,11 +1,8 @@
 package com.sda.meetup.entity;
 
-import lombok.*;
-
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Collection;
-import java.util.UUID;
+import java.util.Set;
 
 /*
 @Entity
@@ -109,7 +106,6 @@ public class User {
     }
 }
 */
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -117,12 +113,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.*;
 
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotEmpty;
-
 @Entity
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = "email"))
-public class User {
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = "email"), name = "USERS")
+public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -141,19 +134,23 @@ public class User {
                     name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(
                     name = "role_id", referencedColumnName = "id"))
-    private Collection<Role> roles;
+    private Collection<RoleEntity> roles;
 
-    public User() {
+    @OneToMany(mappedBy = "userId", fetch = FetchType.LAZY,
+            cascade = CascadeType.PERSIST)
+    private Set<EventEntity> events;
+
+    public UserEntity() {
     }
 
-    public User(String firstName, String lastName, String email, String password) {
+    public UserEntity(String firstName, String lastName, String email, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
     }
 
-    public User(String firstName, String lastName, String email, String password, Collection<Role> roles) {
+    public UserEntity(String firstName, String lastName, String email, String password, Collection<RoleEntity> roles) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -201,11 +198,11 @@ public class User {
         this.password = password;
     }
 
-    public Collection<Role> getRoles() {
+    public Collection<RoleEntity> getRoles() {
         return roles;
     }
 
-    public void setRoles(Collection<Role> roles) {
+    public void setRoles(Collection<RoleEntity> roles) {
         this.roles = roles;
     }
 
@@ -219,5 +216,13 @@ public class User {
                 ", password='" + "*********" + '\'' +
                 ", roles=" + roles +
                 '}';
+    }
+
+    public Set<EventEntity> getEvents() {
+        return events;
+    }
+
+    public void setEvents(Set<EventEntity> events) {
+        this.events = events;
     }
 }

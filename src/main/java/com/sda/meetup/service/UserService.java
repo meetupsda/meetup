@@ -1,7 +1,7 @@
 package com.sda.meetup.service;
 
 import com.sda.meetup.dto.RegistrationDto;
-import com.sda.meetup.entity.User;
+import com.sda.meetup.entity.UserEntity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 import javax.validation.Valid;
@@ -9,8 +9,8 @@ import javax.validation.Valid;
 
 public interface UserService extends UserDetailsService{
 
-    User findByEmail(String email);
+    UserEntity findByEmail(String email);
 
-    User save(@Valid RegistrationDto registration);
+    UserEntity save(@Valid RegistrationDto registration);
 }
 

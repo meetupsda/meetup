@@ -66,13 +66,14 @@
 
     <div class="row">
         <div class="col-md-4 mt-5">
-            <form method="post" th:object="${event}">
-
+            <form action="#" th:action="@{/saveEvent}" th:object="${event}"
+                  method="POST">
+<!--
                 <div class="form-group">
                     <label for="id">User id:</label>
                     <input type="text" id="id" placeholder="User id" autocomplete="off" class="form-control"
                            th:field="*{id}"/>
-                </div>
+                </div>-->
 
                 <div class="form-group">
                     <label for="event">Description:</label>
@@ -101,7 +102,7 @@
                     </div>
                 </div>
 
-                <button class="btn btn-primary" type="submit">Submit form</button>
+                <button class="btn btn-primary" type="submit">Add event</button>
             </form>
         </div>
     </div>

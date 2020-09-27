@@ -1,7 +1,7 @@
 package com.sda.meetup.controller;
 
 import com.sda.meetup.dto.RegistrationDto;
-import com.sda.meetup.entity.User;
+import com.sda.meetup.entity.UserEntity;
 import com.sda.meetup.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,7 +35,7 @@ public class RegistrationController {
     public String registerUserAccount(@ModelAttribute("user") @Valid RegistrationDto userDto,
                                       BindingResult result){
 
-        User existing = userService.findByEmail(userDto.getEmail());
+        UserEntity existing = userService.findByEmail(userDto.getEmail());
         if (existing != null){
             result.rejectValue("email", null, "There is already an account registered with that email");
         }

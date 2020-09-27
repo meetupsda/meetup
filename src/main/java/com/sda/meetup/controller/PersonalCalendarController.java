@@ -1,6 +1,6 @@
 package com.sda.meetup.controller;
 
-import com.sda.meetup.entity.Event;
+import com.sda.meetup.entity.EventEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,12 +13,12 @@ public class PersonalCalendarController {
 
         @GetMapping
         public String main(Model model) {
-            model.addAttribute("event", new Event());
+            model.addAttribute("event", new EventEntity());
             return "personal-calendar";
         }
 
         @PostMapping
-        public String save(Event event, Model model) {
+        public String save(EventEntity event, Model model) {
             model.addAttribute("event", event);
             return "saved";
         }
