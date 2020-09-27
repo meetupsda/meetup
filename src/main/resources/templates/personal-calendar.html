@@ -80,6 +80,7 @@
     <a class="navbar-brand" href="#">Meetup</a>
     <a th:href="@{/}">Home</a>
     <a th:href="@{/personal-calendar}">Personal Calendar</a>
+    <a th:href="@{/addevent}">Add event</a>
     <a th:href="@{/friends-plans}">Friend's Plans</a>
     <div class="topnav-right" sec:authorize="isAnonymous()">
         <a href="#" th:href="@{/registration}" th:inline="text"><span class="glyphicon glyphicon-user"></span> Sign
@@ -92,60 +93,60 @@
     </div>
 </div>
 
-<div style="padding-left:16px">
-    <div class="row" style="padding-left:100px">
-        <div class="col-md-3 mt-4">
-            <form class="form" method="post" th:object="${event}">
+<!--<div style="padding-left:16px">-->
+<!--    <div class="row" style="padding-left:100px">-->
+<!--        <div class="col-md-3 mt-4">-->
+<!--            <form class="form" method="post" th:object="${event}">-->
 
-                <h2>Add entry to your calendar</h2>
+<!--                <h2>Add entry to your calendar</h2>-->
 
-                <div class="form-group">
-                    <label for="title">Title:</label>
-                    <input type="text" id="title" placeholder="Title" class="form-control" th:field="*{title}"/>
-                </div>
+<!--                <div class="form-group">-->
+<!--                    <label for="title">Title:</label>-->
+<!--                    <input type="text" id="title" placeholder="Title" class="form-control" th:field="*{title}"/>-->
+<!--                </div>-->
 
-                <div class="form-group">
-                    <label for="description">Description:</label>
-                    <textarea type="text" rows="2" id="description" placeholder="Description" class="form-control"
-                              th:field="*{description}"></textarea>
-                </div>
+<!--                <div class="form-group">-->
+<!--                    <label for="description">Description:</label>-->
+<!--                    <textarea type="text" rows="2" id="description" placeholder="Description" class="form-control"-->
+<!--                              th:field="*{description}"></textarea>-->
+<!--                </div>-->
 
-                <div class="form-group">
-                    <label for="id_end_time">Start Time:</label>
-                    <div class="input-group date" id="start_time">
-                        <input type="text" name="end_time" value="11:31:00" class="form-control"
-                               placeholder="Start time" th:field="*{time}" title="" required id="id_start_time"/>
-                        <div class="input-group-addon input-group-append">
-                            <div class="input-group-text">
-                                <i class="glyphicon glyphicon-time fa fa-clock-o"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <br>
-                    <div>
-                        <div class="form-group">
-                            <label for="id_end_time">End Time:</label>
-                            <div class="input-group date" id="end_time">
-                                <input type="text" name="end_time" value="12:31:00" class="form-control"
-                                       placeholder="End time" th:field="*{time}" title="" required id="id_end_time"/>
-                                <div class="input-group-addon input-group-append">
-                                    <div class="input-group-text">
-                                        <i class="glyphicon glyphicon-time fa fa-clock-o"></i>
-                                    </div>
-                                </div>
-                                <br>
+<!--                <div class="form-group">-->
+<!--                    <label for="id_end_time">Start Time:</label>-->
+<!--                    <div class="input-group date" id="start_time">-->
+<!--                        <input type="text" name="end_time" value="11:31:00" class="form-control"-->
+<!--                               placeholder="Start time" th:field="*{time}" title="" required id="id_start_time"/>-->
+<!--                        <div class="input-group-addon input-group-append">-->
+<!--                            <div class="input-group-text">-->
+<!--                                <i class="glyphicon glyphicon-time fa fa-clock-o"></i>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <br>-->
+<!--                    <div>-->
+<!--                        <div class="form-group">-->
+<!--                            <label for="id_end_time">End Time:</label>-->
+<!--                            <div class="input-group date" id="end_time">-->
+<!--                                <input type="text" name="end_time" value="12:31:00" class="form-control"-->
+<!--                                       placeholder="End time" th:field="*{time}" title="" required id="id_end_time"/>-->
+<!--                                <div class="input-group-addon input-group-append">-->
+<!--                                    <div class="input-group-text">-->
+<!--                                        <i class="glyphicon glyphicon-time fa fa-clock-o"></i>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <br>-->
 
-                            </div>
-                        </div>
-                        <br>
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <br>-->
 
-                    </div>
-                    <button class="btn btn-primary" type="submit">Submit form</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
+<!--                    </div>-->
+<!--                    <button class="btn btn-primary" type="submit">Submit form</button>-->
+<!--                </div>-->
+<!--            </form>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
 </div>
 
 <script>
