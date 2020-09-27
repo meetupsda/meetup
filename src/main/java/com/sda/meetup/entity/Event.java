@@ -16,7 +16,7 @@ public class Event {
     @DateTimeFormat(pattern = "dd/MM/yyyy h:mm a")
     private LocalDateTime date2;
 
-        public Event(Long id, String description, LocalDateTime date, LocalDateTime date2) {
+    public Event(Long id, String description, LocalDateTime date, LocalDateTime date2) {
         this.id = id;
         this.description = description;
         this.date = date;
