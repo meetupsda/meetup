@@ -4,19 +4,20 @@ import com.sda.meetup.entity.EventEntity;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 import java.time.LocalDateTime;
 
 public class EventDto {
 
-    @NotEmpty(message = "This field can not be empty.")
+
+    @NotEmpty(message = "This field can not be empty !")
     private String description;
 
-
-    @NotEmpty(message = "This field can not be empty.")
+    @NotEmpty(message = "")
     @DateTimeFormat(pattern = "dd/MM/yyyy h:mm a")
     private LocalDateTime date;
 
-    @NotEmpty(message = "This field can not be empty.")
+    @NotEmpty(message = "")
     @DateTimeFormat(pattern = "dd/MM/yyyy h:mm a")
     private LocalDateTime date2;
 
@@ -48,5 +49,11 @@ public class EventDto {
 
         return new EventEntity(this.description, this.date, this.date2, userId);
 
+    }
+
+    public EventDto(String description, LocalDateTime date, LocalDateTime date2) {
+        this.description = description;
+        this.date = date;
+        this.date2 = date2;
     }
 }

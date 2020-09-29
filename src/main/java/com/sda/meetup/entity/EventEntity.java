@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Entity
@@ -16,10 +18,13 @@ public class EventEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+
     private String description;
+
 
     @DateTimeFormat(pattern = "dd/MM/yyyy h:mm a")
     private LocalDateTime date;
+
 
     @DateTimeFormat(pattern = "dd/MM/yyyy h:mm a")
     private LocalDateTime date2;
@@ -76,6 +81,12 @@ public class EventEntity {
         this.date2 = date2;
     }
 
+    public EventEntity(Long id, String description, LocalDateTime date, LocalDateTime date2) {
+        this.id = id;
+        this.description = description;
+        this.date = date;
+        this.date2 = date2;
+    }
 }
 
 

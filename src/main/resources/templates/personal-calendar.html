@@ -1,4 +1,4 @@
-<!--
+
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
@@ -51,90 +51,77 @@
             font-size: 15px;
         }
     </style>
-    <title>Add event</title>
+    <title>Personal calendar</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link th:rel="stylesheet" th:href="@{/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.css}"/>
+ <!--   <link th:rel="stylesheet" th:href="@{/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.css}/>-->
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
-    <link th:rel="stylesheet" th:href="@{/webjars/font-awesome/5.11.2/css/all.css} "/>
+  <!--  <link th:rel="stylesheet" th:href="@{/webjars/font-awesome/5.11.2/css/all.css} "/>-->
 
 </head>
 
+
 <body>
+
+<div class="topnav">
+    <a class="navbar-brand" href="#">Meetup</a>
+    <a th:href="@{/}">Home</a>
+    <a th:href="@{/personal-calendar}">Personal Calendar</a>
+    <a th:href="@{/friends-plans}">Friend's Plans</a>
+    <div class="topnav-right" sec:authorize="isAnonymous()">
+        <a href="#" th:href="@{/registration}" th:inline="text"><span class="glyphicon glyphicon-user"></span> Sign
+            Up</a>
+        <a href="#" th:href="@{/login}" th:inline="text"><span class="glyphicon glyphicon-log-in"></span> Login</a>
+    </div>
+    <div class="topnav-right" sec:authorize="isAuthenticated()">
+        <a href="#" th:href="@{/profile}" th:inline="text"><span class="glyphicon glyphicon-user"></span> Profile</a>
+        <a href="#" th:href="@{/logout}" th:inline="text"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
+    </div>
+</div>
+<br>
+<br>
 
 <div class="container">
 
-    <div class="row">
-        <div class="col-md-4 mt-5">
-            <form method="post" th:object="${event}">
+    <h1>Your personal calendar</h1>
+    <br>
+    <a th:href="@{/showNewEventForm}" class="btn btn-primary btn-sm mb-3">Go back</a>
 
-           &lt;!&ndash;     <div class="form-group">
-                    <label for="id">User id:</label>
-                    <input type="text" id="id" placeholder="User id" autocomplete="off" class="form-control"
-                           th:field="*{id}"/>
-                </div>&ndash;&gt;
+   <table border="0" class="table">
+       <thead class="thead-dark">
+        <tr>
+            <th>Description</th>
+            <th>Start date</th>
+            <th>End date</th>
+            <th>Action</th>
+        </tr>
+      <tbody>
+        <tr th:each="event: ${listEvents}">
+            <div class="form-row">
+            <td><p><strong th:text="${event.description}"></strong></p></td>
 
-                <div class="form-group">
-                    <label for="event">Description:</label>
-                    <input type="text" rows="2" id="event" placeholder="Event description - add your personal notes" autocomplete="off" class="form-control"
-                           th:field="*{description}"/>
-                </div>
-                <div class="form-group">
-                    <label for="date">Start Date & Time:</label>
-                    <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
-                        <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1"
-                               th:field="*{date}" id="date" placeholder="Start Date & Time"/>
-                        <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
-                            <div class="input-group-text"><i class="fa fa-calendar-alt"></i></div>
-                        </div>
-                    </div>
-                </div>
+            <td><p><strong th:text="${event.date}"></strong></p></td>
 
-                <div class="form-group">
-                    <label for="date2">End Date & Time:</label>
-                    <div class="input-group date2" id="datetimepicker2" data-target-input="nearest">
-                        <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker2"
-                               th:field="*{date2}" id="date2" placeholder="End Date & Time"/>
-                        <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
-                            <div class="input-group-text"><i class="fa fa-calendar-alt"></i></div>
-                        </div>
-                    </div>
+                <td><p><strong th:text="${event.date2}"></strong></p></td>
+
+       <!--         <td th:text="${event.description}"></td>
+                <td th:text="${event.date}"></td>
+                <td th:text="${event.date2}"></td>-->
+            <td><a th:href="@{/deleteEvent/{id}(id=${event.id})}" class="btn btn-danger">Delete</a>
+
+            </td>
                 </div>
 
-                <button class="btn btn-primary" type="submit">Add event</button>
-            </form>
-        </div>
-    </div>
+
+ </tr>
+</tbody>
+    </table>
+</div>
 </div>
 
-<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
-<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
-<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
-<script th:src="@{/moment.min.js}"></script>
-<script th:src="@{/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.js}"></script>
-
-<script>
-    $.fn.datetimepicker.Constructor.Default = $.extend({}, $.fn.datetimepicker.Constructor.Default, {
-        icons: {
-            time: 'far fa-clock',
-            date: 'far fa-calendar',
-            up: 'fas fa-arrow-up',
-            down: 'fas fa-arrow-down',
-            previous: 'fas fa-chevron-left',
-            next: 'fas fa-chevron-right',
-            today: 'far fa-calendar-check-o',
-            clear: 'far fa-trash',
-            close: 'far fa-times'
-        } });
-
-    $('#datetimepicker1').datetimepicker({
-        format: 'DD/MM/YYYY h:mm A'
-    });
-
-    $('#datetimepicker2').datetimepicker({
-        format: 'DD/MM/YYYY h:mm A'
-    });
-</script>
 </body>
-</html>-->
+
+</html>
+
+
