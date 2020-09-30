@@ -42,7 +42,6 @@ public class RegistrationDto {
     @Pattern(regexp ="^[A-Za-z0-9]{1}[A-Za-z0-9\\-\\_\\.]+\\@[A-Za-z0-9\\.]+[.][a-z]+$", message = "Email confirm can not be blank and should have mail format. It should be equal to email.")
     private String confirmEmail;
 
-
     public String getFirstName() {
         return firstName;
     }

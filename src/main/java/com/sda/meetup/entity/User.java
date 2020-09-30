@@ -4,7 +4,9 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 
 /*
@@ -121,7 +123,7 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = "email"))
+@Table(name = "Users", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 public class User {
 
     @Id
@@ -142,6 +144,11 @@ public class User {
             inverseJoinColumns = @JoinColumn(
                     name = "role_id", referencedColumnName = "id"))
     private Collection<Role> roles;
+
+
+    @OneToMany(mappedBy = "user")
+    private List<Event> events = new ArrayList<>();
+
 
     public User() {
     }
@@ -207,6 +214,18 @@ public class User {
 
     public void setRoles(Collection<Role> roles) {
         this.roles = roles;
+    }
+
+    public void addEvent(Event event){
+        events.add(event);
+    }
+
+    public List<Event> getEvents(){
+        return events;
+    }
+
+    public void removeEvent(Event event){
+        events.remove(event);
     }
 
     @Override

@@ -48,11 +48,4 @@ public class RegistrationController {
         return "redirect:/login";
     }
 
-
-    /*@PostMapping*/
-/*    @ModelAttribute("user")
-    public String loggedUser(UserRegistrationDto userDto) {
-        User user = userService.findByEmail(userDto.getEmail());
-        return user.getEmail();
-    }*/
 }

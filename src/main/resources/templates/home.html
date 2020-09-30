@@ -78,7 +78,7 @@
     <div class="topnav-logged-in" sec:authorize="isAuthenticated()">
         <a th:href="@{/}">Home</a>
         <a th:href="@{/personal-calendar}">Personal Calendar</a>
-        <a th:href="@{/addevent}">Add event</a>
+        <a th:href="@{/add-event}">Add event</a>
         <a th:href="@{/}">Friend's Plans</a>
         <div class="topnav-right" sec:authorize="isAuthenticated()">
             <a href="#" th:href="@{/profile}" th:inline="text"><span class="glyphicon glyphicon-user"></span>

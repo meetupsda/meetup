@@ -6,18 +6,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/personal-calendar")
-public class EventController {
+@RequestMapping("/friends-plans")
+public class FriendsPlansController {
 
     private final EventService eventService;
 
-    public EventController(EventService eventService) {
+    public FriendsPlansController(EventService eventService) {
         this.eventService = eventService;
     }
 
     @RequestMapping
     ModelAndView calendarPage() {
-        ModelAndView mnv = new ModelAndView("personal-calendar");
+        ModelAndView mnv = new ModelAndView("friends-plans");
         mnv.addObject("events", eventService.getUserEvents());
         return mnv;
     }

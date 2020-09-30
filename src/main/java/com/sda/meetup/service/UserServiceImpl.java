@@ -5,10 +5,12 @@ import com.sda.meetup.entity.Role;
 import com.sda.meetup.entity.User;
 import com.sda.meetup.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AbstractAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -31,6 +33,27 @@ public class UserServiceImpl implements UserService {
 
     public User findByEmail(String email) {
         return userRepository.findByEmail(email);
+    }
+
+//    public User getUserById() {
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        User user = (User) authentication.getPrincipal();
+//        return user;
+//    }
+
+//    public Long findById(){
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        User user = (User)authentication.getPrincipal();
+//        Long userId = user.getId();
+//        return userId;
+//    }
+
+    public User getUserById(){
+        AbstractAuthenticationToken auth = (AbstractAuthenticationToken)
+                SecurityContextHolder.getContext().getAuthentication();
+        UserDetails details = (UserDetails) auth.getDetails();
+        User user = (User) details;
+        return user;
     }
 
     public User save(@Valid RegistrationDto registration) {

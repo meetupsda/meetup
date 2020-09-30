@@ -62,7 +62,7 @@
     <a class="navbar-brand" href="#">Meetup</a>
     <a th:href="@{/}">Home</a>
     <a th:href="@{/personal-calendar}">Personal Calendar</a>
-    <a th:href="@{/addevent}">Add event</a>
+    <a th:href="@{/add-event}">Add event</a>
     <a th:href="@{/friends-plans}">Friend's Plans</a>
     <div class="topnav-right" sec:authorize="isAnonymous()">
         <a href="#" th:href="@{/registration}" th:inline="text"><span class="glyphicon glyphicon-user"></span> Sign
@@ -78,7 +78,7 @@
 <div class="container-fluid", style="padding-left: 100px">
     <h2 class="mt-5 mb-2">Event submitted</h2>
 
-    <p><label>User id: </label> <strong th:text="${event.id}"></strong></p>
+<!--    <p><label>User id: </label> <strong th:text="${event.id}"></strong></p>-->
     <p><label>Description: </label> <strong th:text="${event.description}"></strong></p>
     <p><label>Start Date & Time: </label> <strong th:text="${event.date}"></strong></p>
     <p><label>End Date & Time: </label> <strong th:text="${event.date2}"></strong></p>

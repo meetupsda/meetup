@@ -30,11 +30,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/login")
                 .defaultSuccessUrl("/", true)
-                //.failureUrl("/login.html?error=true")
                 .and()
                 .logout()
-               /* .logoutUrl("/perform_logout")
-                .deleteCookies("JSESSIONID");*/
                 .invalidateHttpSession(true)
                 .clearAuthentication(true)
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))

@@ -1,22 +1,18 @@
-package com.sda.meetup.entity;
+package com.sda.meetup.dto;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.sda.meetup.entity.User;
+import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.ForeignKey;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
-import java.util.Objects;
 
-@Entity
-@Table(name = "Events")
-public class Event {
+@ToString
+public class EventDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String description;
     @DateTimeFormat(pattern = "dd/MM/yyyy h:mm a")
@@ -28,23 +24,19 @@ public class Event {
     @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "FK_user_id"))
     private User user;
 
-    public Event(String description, LocalDateTime date, LocalDateTime date2, User user) {
+    public EventDTO(Long id, String description, LocalDateTime date, LocalDateTime date2, User user) {
+        this.id = id;
         this.description = description;
         this.date = date;
         this.date2 = date2;
         this.user = user;
     }
 
-    public Event() {
-
-    }
-
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public EventDTO() {
     }
 
     public String getDescription() {
@@ -77,21 +69,5 @@ public class Event {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Event event = (Event) o;
-        return Objects.equals(id, event.id) &&
-                Objects.equals(description, event.description) &&
-                Objects.equals(date, event.date) &&
-                Objects.equals(date2, event.date2);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, description, date, date2);
     }
 }
