@@ -1,14 +1,18 @@
 package com.sda.meetup.controller;
 
 import com.sda.meetup.dto.EventDto;
+import com.sda.meetup.dto.RegistrationDto;
 import com.sda.meetup.entity.EventEntity;
 import com.sda.meetup.service.EventService;
 import com.sda.meetup.service.EventServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.validation.Valid;
 
 @Controller
 public class EventController {
@@ -30,11 +34,12 @@ public class EventController {
         return "saved";
     }*/
 
-    @PostMapping("/saveEvent")
+ /*   @PostMapping("/saveEvent")
     public String saveEvent(@ModelAttribute("event") EventDto event) {
         eventService.saveEvent(event);
         return "saved";
-    }
+    }*/
+
 
     @GetMapping("/personal-calendar")
     public String viewAllEvents(Model model) {
@@ -50,7 +55,14 @@ public class EventController {
         return "redirect:/personal-calendar";
     }
 
-
-
+    @PostMapping("/saveEvent")
+    public String validateEvent(@ModelAttribute("event") @Valid EventDto event,
+                               BindingResult result) {
+        if (result.hasErrors()) {
+            return "new_event";
+        }
+        eventService.saveEvent(event);
+        return "/saved";
+    }
 
 }

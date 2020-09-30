@@ -91,9 +91,6 @@
             <form action="#" th:action="@{/saveEvent}" th:object="${event}"
                   method="POST">
 
-                <p class="error-message" th:if="${#fields.hasGlobalErrors()}"
-                   th:each="error : ${#fields.errors('global')}" th:text="${error}">Validation
-                    error</p>
 <!--
                 <div class="form-group">
                     <label for="id">User id:</label>
@@ -105,6 +102,8 @@
                     <label for="event">Description:</label>
                     <input type="text" rows="2" id="event" placeholder="Event description - add your personal notes" class="form-control" autofocus="autofocus"
                            th:field="*{description}"/>
+                    <td th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Description
+                        Error</td>
                 </div>
 
 
@@ -115,8 +114,11 @@
                                th:field="*{date}" id="date" placeholder="Start Date & Time" autofocus="autofocus"/>
                         <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
                             <div class="input-group-text"><i class="fa fa-calendar-alt"></i></div>
+
                         </div>
                     </div>
+                    <td th:if="${#fields.hasErrors('date')}" th:errors="*{date}">Date
+                        Error</td>
                 </div>
 
                 <div class="form-group">
@@ -128,6 +130,8 @@
                             <div class="input-group-text"><i class="fa fa-calendar-alt"></i></div>
                         </div>
                     </div>
+                    <td th:if="${#fields.hasErrors('date2')}" th:errors="*{date2}">Date
+                        Error</td>
                 </div>
 
 

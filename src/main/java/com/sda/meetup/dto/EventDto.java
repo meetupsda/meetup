@@ -1,8 +1,11 @@
 package com.sda.meetup.dto;
 
 import com.sda.meetup.entity.EventEntity;
+import com.sun.istack.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.Future;
+import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDateTime;
@@ -13,11 +16,11 @@ public class EventDto {
     @NotEmpty(message = "This field can not be empty !")
     private String description;
 
-    @NotEmpty(message = "")
+    @FutureOrPresent(message = "Please add present or future date.")
     @DateTimeFormat(pattern = "dd/MM/yyyy h:mm a")
     private LocalDateTime date;
 
-    @NotEmpty(message = "")
+    @Future(message = "Please add future date.")
     @DateTimeFormat(pattern = "dd/MM/yyyy h:mm a")
     private LocalDateTime date2;
 
