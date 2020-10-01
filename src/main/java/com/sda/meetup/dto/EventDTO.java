@@ -1,5 +1,6 @@
 package com.sda.meetup.dto;
 
+import com.sda.meetup.entity.Event;
 import com.sda.meetup.entity.User;
 import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -70,4 +71,5 @@ public class EventDTO {
     public void setUser(User user) {
         this.user = user;
     }
+
 }

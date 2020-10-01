@@ -2,6 +2,7 @@ package com.sda.meetup.controller;
 
 import com.sda.meetup.dto.EventDTO;
 import com.sda.meetup.entity.Event;
+import com.sda.meetup.service.EventServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,10 +11,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class AddEventController {
 
-    private final EventService eventService;
+    private final EventServiceImpl eventServiceImpl;
 
-    public AddEventController(EventService eventService) {
-        this.eventService = eventService;
+    public AddEventController(EventServiceImpl eventServiceImpl) {
+        this.eventServiceImpl = eventServiceImpl;
     }
 
     @GetMapping("/add-event")
@@ -25,7 +26,7 @@ public class AddEventController {
     @PostMapping("/add-event")
     public String savedEvent(EventDTO eventDTO, Model model) {
         model.addAttribute("event", eventDTO);
-        eventService.saveEvent(eventDTO);
+        eventServiceImpl.saveEvent(eventDTO);
         return "saved";
     }
 }

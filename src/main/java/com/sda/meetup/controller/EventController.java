@@ -1,5 +1,6 @@
 package com.sda.meetup.controller;
 
+import com.sda.meetup.service.EventServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -9,24 +10,24 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/personal-calendar")
 public class EventController {
 
-    private final EventService eventService;
+    private final EventServiceImpl eventServiceImpl;
 
-    public EventController(EventService eventService) {
-        this.eventService = eventService;
+    public EventController(EventServiceImpl eventServiceImpl) {
+        this.eventServiceImpl = eventServiceImpl;
     }
 
     @RequestMapping
     ModelAndView calendarPage() {
         ModelAndView mnv = new ModelAndView("personal-calendar");
-        mnv.addObject("events", eventService.getUserEvents());
+        mnv.addObject("events", eventServiceImpl.getUserEvents());
         return mnv;
     }
 
     @RequestMapping(method = RequestMethod.POST)
     ModelAndView checkMeetingTime() {
         ModelAndView mnv = new ModelAndView("meeting-time");
-        mnv.addObject("events", eventService.getUserEvents());
-        mnv.addObject("checkTimes", eventService.findSuitableDate());
+        mnv.addObject("events", eventServiceImpl.getUserEvents());
+        mnv.addObject("checkSuitableDate", eventServiceImpl.findSuitableDate());
         return mnv;
     }
 

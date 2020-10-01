@@ -108,29 +108,40 @@
         <a href="#" th:href="@{/logout}" th:inline="text"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
     </div>
 </div>
-<div class="container-fluid">
-    <div class="col-md-4 mt-5">
-
-        <form th:object="${checkTimes}" method="post" th:action="@{/personal-calendar}">
-            <button th:type="submit">Check the best meeting time</button>
-        </form>
-
-        <h2>All events:</h2>
-        <table>
-            <tr>
-                <th>Event description</th>
-                <th>Start date</th>
-                <th>End date</th>
-            </tr>
-            <th:block th:each="event : ${events}">
+<div class="container-fluid" , style="padding-left: 100px">
+    <h2 class="mt-5 mb-2">All events </h2>
+    <div class="row">
+        <div class="col-md-4 mt-5">
+            <table>
                 <tr>
-                    <th th:text="${event.description}"></th>
-                    <th th:text="${event.date}"></th>
-                    <th th:text="${event.date2}"></th>
-                    <th th:text="${event.user}"></th>
+                    <th>Event description</th>
+                    <th>Start date</th>
+                    <th>End date</th>
+                    <th>Name</th>
+                    <th>Surname</th>
                 </tr>
-            </th:block>
-        </table>
+                <th:block th:each="event : ${events}">
+                    <tr>
+                        <th th:text="${event.description}"></th>
+                        <th th:text="${event.date}"></th>
+                        <th th:text="${event.date2}"></th>
+                        <th th:text="${event.user.getFirstName()}"></th>
+                        <th th:text="${event.user.getLastName()}"></th>
+                    </tr>
+                </th:block>
+            </table>
+            <br>
+            <br>
+        </div>
+        <br>
+        <br>
+
+        <div class="col-md-6 col-md-offset-3">
+            <form th:object="${checkSuitableDate}" method="post" th:action="@{/personal-calendar}">
+                <button th:type="submit" class="btn btn-primary">Check the best meeting time</button>
+            </form>
+        </div>
+
     </div>
 </div>
 

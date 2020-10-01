@@ -19,6 +19,7 @@
         tr:nth-child(even) {
             background-color: #dddddd;
         }
+
         body {
             background-image: url('https://iili.io/2TBvAQ.jpg');
             background-repeat: no-repeat;
@@ -107,9 +108,12 @@
         <a href="#" th:href="@{/logout}" th:inline="text"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
     </div>
 </div>
+
 <div class="container-fluid">
-    <p>
-    <p th:text="${checkTimes}"/>
+    <div class="col-md-6 col-md-offset-3">
+        <h2>Your meeting should be scheduled on </h2>
+        <p style="font-size:30px" th:text="${checkSuitableDate}"/>
+    </div>
 </div>
 
 </body>

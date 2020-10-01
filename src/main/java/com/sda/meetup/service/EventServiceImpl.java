@@ -1,9 +1,13 @@
-package com.sda.meetup.controller;
+package com.sda.meetup.service;
 
 import com.sda.meetup.dto.EventDTO;
 import com.sda.meetup.entity.Event;
+import com.sda.meetup.entity.User;
 import com.sda.meetup.repository.EventRepository;
 import com.sda.meetup.repository.UserRepository;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -12,33 +16,46 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class EventService {
+public class EventServiceImpl {
 
     private final EventRepository eventRepository;
     private final UserRepository userRepository;
 
     private List<Event> userEvents = new ArrayList<>();
 
-    public EventService(EventRepository eventRepository, UserRepository userRepository) {
+    public EventServiceImpl(EventRepository eventRepository, UserRepository userRepository) {
         this.eventRepository = eventRepository;
         this.userRepository = userRepository;
     }
 
     public Event saveEvent(EventDTO eventDTO) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        User userEntity = userRepository.findByEmail(userDetails.getUsername());
+
         Event event = new Event();
         event.setDescription(eventDTO.getDescription());
         event.setDate(eventDTO.getDate());
         event.setDate2(eventDTO.getDate2());
-        event.setUser(eventDTO.getUser());
+        event.setUser(userEntity);
         return eventRepository.save(event);
     }
 
-    public List<EventDTO> getUserEvents() {
+    public List<EventDTO> getAllEvents() {
         return eventRepository
                 .findAll()
                 .stream()
                 .map(entity -> new EventDTO(entity.getId(), entity.getDescription(), entity.getDate(), entity.getDate2(), entity.getUser()))
                 .collect(Collectors.toList());
+    }
+
+    public List<Event> getUserEvents(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        User userEntity = userRepository.findByEmail(userDetails.getUsername());
+
+        return userEntity.getEvents();
     }
 
     public LocalDate findSuitableDate() {
