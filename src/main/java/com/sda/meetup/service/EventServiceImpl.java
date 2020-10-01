@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class EventServiceImpl {
+public class EventServiceImpl implements EventService{
 
     private final EventRepository eventRepository;
     private final UserRepository userRepository;
@@ -56,6 +56,11 @@ public class EventServiceImpl {
         User userEntity = userRepository.findByEmail(userDetails.getUsername());
 
         return userEntity.getEvents();
+    }
+
+    @Override
+    public void deleteEventById(Long id) {
+        this.eventRepository.deleteById(id);
     }
 
     public LocalDate findSuitableDate() {

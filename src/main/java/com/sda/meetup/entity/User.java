@@ -216,8 +216,8 @@ public class User {
         this.roles = roles;
     }
 
-    public void addEvent(Event event){
-        events.add(event);
+    public void setEvents(List<Event> events) {
+        this.events = events;
     }
 
     public List<Event> getEvents(){
