@@ -1,108 +1,82 @@
 package com.sda.meetup.engine;
 
+import com.sda.meetup.entity.Event;
+
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Engine {
-    public static void main(String[] args) {
 
-        LocalDateTime start1 = LocalDateTime.of(
-                LocalDate.of(2020, 05, 06),
-                LocalTime.of(11, 30));
-
-        LocalDateTime end1 = LocalDateTime.of(
-                LocalDate.of(2020, 05, 06),
-                LocalTime.of(15, 30));
-
-        LocalDateTime start2 = LocalDateTime.of(
-                LocalDate.of(2020, 05, 06),
-                LocalTime.of(11, 30));
-
-        LocalDateTime end2 = LocalDateTime.of(
-                LocalDate.of(2020, 05, 06),
-                LocalTime.of(15, 30));
-
-        LocalDateTime start3 = LocalDateTime.of(
-                LocalDate.of(2020, 05, 30),
-                LocalTime.of(11, 00));
-
-        LocalDateTime end3 = LocalDateTime.of(
-                LocalDate.of(2020, 05, 30),
-                LocalTime.of(15, 30));
-
-        LocalDateTime start4 = LocalDateTime.of(
-                LocalDate.of(2020, 05, 30),
-                LocalTime.of(10, 30));
-
-        LocalDateTime end4 = LocalDateTime.of(
-                LocalDate.of(2020, 05, 30),
-                LocalTime.of(17, 30));
-
-        LocalDateTime start5 = LocalDateTime.of(
-                LocalDate.of(2020, 05, 30),
-                LocalTime.of(16, 30));
-
-        LocalDateTime end5 = LocalDateTime.of(
-                LocalDate.of(2020, 05, 30),
-                LocalTime.of(19, 00));
-
-        Person p1 = new Person(1, start1, end1);
-        Person p2 = new Person(2, start2, end2);
-        Person p3 = new Person(3, start3, end3);
-        Person p4 = new Person(4, start4, end4);
-        Person p5 = new Person(5, start5, end5);
-
-        List<Person> persons = new ArrayList<>();
-        persons.add(p1);
-        persons.add(p2);
-        persons.add(p3);
-        persons.add(p4);
-        persons.add(p5);
+    public static LocalDate findBestDate(List<Event> events) {
 
         int counter = 0;
         int max = 0;
-        LocalDate finalDate = LocalDate.of(2020, 01, 01);
+        LocalDate bestDate = LocalDate.MIN;
+        for (int i = 0; i < events.size(); i++) {
+            LocalDate date1 = events.get(i).getDate().toLocalDate();
 
-        for (int i = 0; i < persons.size(); i++) {
-            LocalDate date1 = persons.get(i).getStart().toLocalDate();
-
-            for (int j = 1; j < persons.size(); j++) {
-                LocalDate date2 = persons.get(j).getStart().toLocalDate();
+            for (int j = 1; j < events.size(); j++) {
+                LocalDate date2 = events.get(j).getDate().toLocalDate();
                 if (date1.equals(date2)) {
                     counter = counter + 1;
                     if (counter > max) {
                         max = counter;
-                        finalDate = date1;
+                        bestDate = date1;
                     }
                 } else {
                     counter = 0;
                 }
             }
         }
+        return bestDate;
+    }
 
-        System.out.println("Najbardziej odpowiedni dzień na spotkanie to " + finalDate);
+    public static LocalTime findMinTime(LocalTime time1, LocalTime time2) {
+        LocalTime min = (time1.isBefore(time2) || time1.equals(time2) ? time1 : time2);
+        return min;
+    }
 
-        System.out.println("Może się spotkać osób: " + max);
+    public static LocalTime findMaxTime(LocalTime time1, LocalTime time2) {
+        LocalTime max = (time1.isAfter(time2) | time1.equals(time2) ? time1 : time2);
+        return max;
+    }
 
-        List<Entry> entries = new ArrayList<>();
+    public static Overlap findOverlap(Event event1, Event event2) {
+//       TODO set constraints (StartA <= EndA) and (StartB <= EndB)) in the addEvent form
 
+        Overlap overlap = new Overlap(LocalTime.MIN, LocalTime.MAX);
 
-        for (int i = 0; i < persons.size(); i++) {
-            LocalDate date = persons.get(i).getStart().toLocalDate();
-            if (date.equals(finalDate)){
-                LocalTime StartTime = persons.get(i).getStart().toLocalTime();
-                LocalTime EndTime = persons.get(i).getEnd().toLocalTime();
-                Entry entry = new Entry(StartTime, EndTime);
-                entries.add(entry);
+        if ((event1.getDate().toLocalTime().isBefore(event2.getDate2().toLocalTime())
+                && event2.getDate().toLocalTime().isBefore(event1.getDate2().toLocalTime()))) {
+            overlap.setStartTime(findMaxTime(event1.getDate().toLocalTime(), event2.getDate().toLocalTime()));
+            overlap.setEndTime(findMinTime(event1.getDate2().toLocalTime(), event2.getDate2().toLocalTime()));
+        }
+        return overlap;
+    }
+
+    public static Overlap findBestTime(List<Event> events, LocalDate bestDate) {
+
+        Overlap bestTime = new Overlap(LocalTime.MIN, LocalTime.MAX);
+
+        List<Event> eventsOnBestDate = events.stream()
+                .filter(a -> a.getDate().toLocalDate().equals(bestDate))
+                .collect(Collectors.toList());
+
+        for (int i = 0; i < eventsOnBestDate.size(); i++) {
+            Event event1 = eventsOnBestDate.get(i);
+            for (int j = 1; j < eventsOnBestDate.size(); j++) {
+                Event event2 = eventsOnBestDate.get(j);
+                Overlap overlap = findOverlap(event1, event2);
+                if (!overlap.equals(bestTime)) {
+                    bestTime = Overlap.compare(overlap, bestTime);
+                }
             }
         }
-
-        for (Entry e : entries){
-            System.out.println(e);
-        }
-
+        return bestTime;
     }
 }
+
+
+
