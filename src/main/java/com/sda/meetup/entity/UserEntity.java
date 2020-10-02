@@ -120,7 +120,8 @@ public class UserEntity {
         return events;
     }
 
-    public void setEvents(Set<EventEntity> events) {
+    public Set<EventEntity> setEvents(Set<EventEntity> events) {
         this.events = events;
+        return events;
     }
 }

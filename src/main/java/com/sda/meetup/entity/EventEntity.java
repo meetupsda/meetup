@@ -29,6 +29,13 @@ public class EventEntity {
     @DateTimeFormat(pattern = "dd/MM/yyyy h:mm a")
     private LocalDateTime date2;
 
+    public EventEntity(String description, LocalDateTime date, LocalDateTime date2) {
+        this.description = description;
+        this.date = date;
+        this.date2 = date2;
+
+    }
+
     public Long getUserId() {
         return userId;
     }
@@ -87,6 +94,8 @@ public class EventEntity {
         this.date = date;
         this.date2 = date2;
     }
+
+
 }
 
 
