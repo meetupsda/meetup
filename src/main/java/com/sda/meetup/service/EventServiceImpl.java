@@ -1,6 +1,7 @@
 package com.sda.meetup.service;
 
 import com.sda.meetup.dto.EventDTO;
+import com.sda.meetup.dto.UserDTO;
 import com.sda.meetup.entity.Event;
 import com.sda.meetup.entity.User;
 import com.sda.meetup.repository.EventRepository;
@@ -38,7 +39,7 @@ public class EventServiceImpl implements EventService{
         event.setDescription(eventDTO.getDescription());
         event.setDate(eventDTO.getDate());
         event.setDate2(eventDTO.getDate2());
-        event.setUser(userEntity);
+        event.setUserId(userEntity.getId());
         return eventRepository.save(event);
     }
 
@@ -46,7 +47,7 @@ public class EventServiceImpl implements EventService{
         return eventRepository
                 .findAll()
                 .stream()
-                .map(entity -> new EventDTO(entity.getId(), entity.getDescription(), entity.getDate(), entity.getDate2(), entity.getUser()))
+                .map(entity -> new EventDTO(entity.getId(), entity.getDescription(), entity.getDate(), entity.getDate2(), UserDTO.fromEntity(userRepository.findById(entity.getUserId()).get())))
                 .collect(Collectors.toList());
     }
 
@@ -55,7 +56,7 @@ public class EventServiceImpl implements EventService{
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         User userEntity = userRepository.findByEmail(userDetails.getUsername());
 
-        return userEntity.getEvents();
+        return eventRepository.findByUserId(userEntity.getId());
     }
 
     @Override
@@ -71,7 +72,7 @@ public class EventServiceImpl implements EventService{
         List<EventDTO> userEvents = eventRepository
                 .findAll()
                 .stream()
-                .map(entity -> new EventDTO(entity.getId(), entity.getDescription(), entity.getDate(), entity.getDate2(), entity.getUser()))
+                .map(entity -> new EventDTO(entity.getId(), entity.getDescription(), entity.getDate(), entity.getDate2(), UserDTO.fromEntity(userRepository.findById(entity.getUserId()).get())))
                 .collect(Collectors.toList());
 
         for (int i = 0; i < userEvents.size(); i++) {

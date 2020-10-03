@@ -24,15 +24,15 @@ public class Event {
     @DateTimeFormat(pattern = "dd/MM/yyyy h:mm a")
     private LocalDateTime date2;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "FK_user_id"))
-    private User user;
+//    @ManyToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "FK_user_id"))
+    private Long userId;;
 
     public Event(String description, LocalDateTime date, LocalDateTime date2, User user) {
         this.description = description;
         this.date = date;
         this.date2 = date2;
-        this.user = user;
+        this.userId = user.getId();
     }
 
     public Event() {
@@ -71,14 +71,6 @@ public class Event {
         this.date2 = date2;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -93,5 +85,13 @@ public class Event {
     @Override
     public int hashCode() {
         return Objects.hash(id, description, date, date2);
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }

@@ -127,7 +127,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
@@ -146,8 +146,8 @@ public class User {
     private Collection<Role> roles;
 
 
-    @OneToMany(mappedBy = "user")
-    private List<Event> events = new ArrayList<>();
+//    @OneToMany(mappedBy = "user")
+//    private List<Event> events = new ArrayList<>();
 
 
     public User() {
@@ -216,17 +216,17 @@ public class User {
         this.roles = roles;
     }
 
-    public void setEvents(List<Event> events) {
-        this.events = events;
-    }
-
-    public List<Event> getEvents(){
-        return events;
-    }
-
-    public void removeEvent(Event event){
-        events.remove(event);
-    }
+//    public void setEvents(List<Event> events) {
+//        this.events = events;
+//    }
+//
+//    public List<Event> getEvents(){
+//        return events;
+//    }
+//
+//    public void removeEvent(Event event){
+//        events.remove(event);
+//    }
 
     @Override
     public String toString() {

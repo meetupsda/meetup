@@ -20,12 +20,9 @@ public class EventDTO {
     private LocalDateTime date;
     @DateTimeFormat(pattern = "dd/MM/yyyy h:mm a")
     private LocalDateTime date2;
+    private UserDTO user;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "FK_user_id"))
-    private User user;
-
-    public EventDTO(Long id, String description, LocalDateTime date, LocalDateTime date2, User user) {
+    public EventDTO(Long id, String description, LocalDateTime date, LocalDateTime date2, UserDTO user) {
         this.id = id;
         this.description = description;
         this.date = date;
@@ -64,12 +61,11 @@ public class EventDTO {
         this.date2 = date2;
     }
 
-    public User getUser() {
+    public UserDTO getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(UserDTO user) {
         this.user = user;
     }
-
 }
