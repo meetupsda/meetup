@@ -16,7 +16,7 @@ To use the app, you need to register.\
 
 ### Personal Calendar
 The good news is, once you've registered and logged in, Meetup keeps all your info on your account! In the Personal Calendar tab you can browse all your Events - i.e. the dates when you are available for a meeting.
-<img src="https://user-images.githubusercontent.com/60902795/94993026-56853f00-058e-11eb-9247-74bc3a203562.png" width="800"> \
+<img src="https://user-images.githubusercontent.com/60902795/94993225-bfb98200-058f-11eb-9375-d3bb2a5812ea.png" width="800"> \
 
 
 ### Adding and removing Events
