@@ -27,7 +27,8 @@ public class FriendsPlansController {
     ModelAndView checkMeetingTime() {
         ModelAndView mnv = new ModelAndView("meeting-time");
         mnv.addObject("events", eventServiceImpl.getAllEvents());
-        mnv.addObject("checkTimes", eventServiceImpl.findSuitableDate());
+        mnv.addObject("bestDate", eventServiceImpl.findBestDate());
+        mnv.addObject("bestTime", eventServiceImpl.findBestTime(eventServiceImpl.findBestDate()));
         return mnv;
     }
 

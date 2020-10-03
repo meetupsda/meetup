@@ -29,7 +29,6 @@ public class EventController {
     ModelAndView checkMeetingTime() {
         ModelAndView mnv = new ModelAndView("meeting-time");
         mnv.addObject("events", eventServiceImpl.getUserEvents());
-        mnv.addObject("checkSuitableDate", eventServiceImpl.findSuitableDate());
         return mnv;
     }
 

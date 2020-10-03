@@ -137,7 +137,9 @@
         <br>
 
         <div class="col-md-6 col-md-offset-3">
-            <form th:object="${checkSuitableDate}" method="post" th:action="@{/personal-calendar}">
+            <form method="post" th:action="@{/friends-plans}">
+                <object th:value="${bestDate}"/>
+                <object th:value="${bestTime}"/>
                 <button th:type="submit" class="btn btn-primary">Check the best meeting time</button>
             </form>
         </div>
