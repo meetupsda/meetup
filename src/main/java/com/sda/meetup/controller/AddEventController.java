@@ -5,8 +5,12 @@ import com.sda.meetup.entity.Event;
 import com.sda.meetup.service.EventServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import javax.validation.Valid;
 
 @Controller
 public class AddEventController {
@@ -23,10 +27,13 @@ public class AddEventController {
         return "add-event";
     }
 
-    @PostMapping("/add-event")
-    public String savedEvent(EventDTO eventDTO, Model model) {
-        model.addAttribute("event", eventDTO);
-        eventServiceImpl.saveEvent(eventDTO);
-        return "saved";
+    @PostMapping("/saveEvent")
+    public String validateEvent(@ModelAttribute("event") @Valid EventDTO event,
+                                BindingResult result) {
+        if (result.hasErrors()) {
+            return "add-event";
+        }
+        eventServiceImpl.saveEvent(event);
+        return "/saved";
     }
 }

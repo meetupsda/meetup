@@ -1,23 +1,25 @@
 package com.sda.meetup.dto;
 
-import com.sda.meetup.entity.Event;
-import com.sda.meetup.entity.User;
 import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.CascadeType;
-import javax.persistence.ForeignKey;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.FutureOrPresent;
+import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
 
 @ToString
 public class EventDTO {
 
     private Long id;
+    @NotEmpty(message = "This field can not be empty !")
     private String description;
+
+    @FutureOrPresent(message = "Please add present or future date.")
     @DateTimeFormat(pattern = "dd/MM/yyyy h:mm a")
     private LocalDateTime date;
+
+    @Future(message = "Please add future date.")
     @DateTimeFormat(pattern = "dd/MM/yyyy h:mm a")
     private LocalDateTime date2;
     private UserDTO user;

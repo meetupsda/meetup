@@ -62,7 +62,7 @@ public class EventServiceImpl implements EventService{
     }
 
     @Override
-    public void deleteEventById(Long id) {
+    public void deleteEventById(long id) {
         this.eventRepository.deleteById(id);
     }
 
@@ -93,12 +93,12 @@ public class EventServiceImpl implements EventService{
     }
 
     public static LocalTime findMinTime(LocalTime time1, LocalTime time2) {
-        LocalTime min = (time1.isBefore(time2) || time1.equals(time2) ? time1 : time2);
+        LocalTime min = ((time1.isBefore(time2) || time1.equals(time2)) ? time1 : time2);
         return min;
     }
 
     public static LocalTime findMaxTime(LocalTime time1, LocalTime time2) {
-        LocalTime max = (time1.isAfter(time2) | time1.equals(time2) ? time1 : time2);
+        LocalTime max = ((time1.isAfter(time2) || time1.equals(time2)) ? time1 : time2);
         return max;
     }
 

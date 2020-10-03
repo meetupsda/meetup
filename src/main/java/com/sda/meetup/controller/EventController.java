@@ -2,14 +2,10 @@ package com.sda.meetup.controller;
 
 import com.sda.meetup.service.EventServiceImpl;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/personal-calendar")
 public class EventController {
 
     private final EventServiceImpl eventServiceImpl;
@@ -18,18 +14,12 @@ public class EventController {
         this.eventServiceImpl = eventServiceImpl;
     }
 
-    @RequestMapping
-    ModelAndView calendarPage() {
-        ModelAndView mnv = new ModelAndView("personal-calendar");
-        mnv.addObject("events", eventServiceImpl.getUserEvents());
-        return mnv;
-    }
+    @GetMapping("/personal-calendar")
+    public String viewAllEvents(Model model) {
+        /*model.addAttribute("listEvents", eventService.getAllEvents());*/
+        model.addAttribute("events", eventServiceImpl.getUserEvents());
+        return "personal-calendar";
 
-    @RequestMapping(method = RequestMethod.POST)
-    ModelAndView checkMeetingTime() {
-        ModelAndView mnv = new ModelAndView("meeting-time");
-        mnv.addObject("events", eventServiceImpl.getUserEvents());
-        return mnv;
     }
 
     @GetMapping("/deleteEvent/{id}")
@@ -37,5 +27,7 @@ public class EventController {
         eventServiceImpl.deleteEventById(id);
         return "redirect:/personal-calendar";
     }
+
+
 
 }

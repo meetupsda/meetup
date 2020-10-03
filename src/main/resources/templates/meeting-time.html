@@ -16,10 +16,6 @@
             padding: 8px;
         }
 
-        tr:nth-child(even) {
-            background-color: #dddddd;
-        }
-
         body {
             background-image: url('https://iili.io/2TBvAQ.jpg');
             background-repeat: no-repeat;
@@ -65,38 +61,25 @@
             text-decoration: none;
             font-size: 15px;
         }
+
+
     </style>
     <title>Personal Calendar</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
-    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script crossorigin="anonymous" integrity="sha384-xBuQ/xzmlsLoJpyjoggmTEz8OWUFM0/RC5BsqQBDX2v5cMvDHcMakNTNrHIW2I5f"
-            src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script crossorigin="anonymous" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-            src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <script crossorigin="anonymous" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.28.0/moment.min.js"
-            integrity="sha512-Q1f3TS3vSt1jQ8AwP2OuenztnLU6LwxgyyYOG1jgMW/cbEMHps/3wjvnl1P3WTrF3chJUWEoxDUEjMxDV8pujg=="
-            crossorigin="anonymous"></script>
-    <link href="../static/css/bootstrap-datetimepicker.min.css" th:href="@{/css/bootstrap-datetimepicker.min.css}"
-          rel="stylesheet"/>
-    <script src="../static/js/bootstrap-datetimepicker.min.js" th:src="@{/js/bootstrap-datetimepicker.min.js}"/>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.28.0/moment.min.js"
-            integrity="sha512-Q1f3TS3vSt1jQ8AwP2OuenztnLU6LwxgyyYOG1jgMW/cbEMHps/3wjvnl1P3WTrF3chJUWEoxDUEjMxDV8pujg=="
-            crossorigin="anonymous"></script>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+
 
 </head>
+
+
 <body>
+
 <div class="topnav">
     <a class="navbar-brand" href="#">Meetup</a>
     <a th:href="@{/}">Home</a>
     <a th:href="@{/personal-calendar}">Personal Calendar</a>
-    <a th:href="@{/add-event}">Add event</a>
     <a th:href="@{/friends-plans}">Friend's Plans</a>
     <div class="topnav-right" sec:authorize="isAnonymous()">
         <a href="#" th:href="@{/registration}" th:inline="text"><span class="glyphicon glyphicon-user"></span> Sign
@@ -108,13 +91,13 @@
         <a href="#" th:href="@{/logout}" th:inline="text"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
     </div>
 </div>
+<br>
+<br>
 
-<div class="container-fluid">
-    <div class="col-md-6 col-md-offset-3">
-        <h2>Your meeting should be scheduled on </h2>
-        <p style="font-size:30px" th:text="${bestDate}"/>
-        <p style="font-size:30px" th:text="${bestTime}"/>
-    </div>
+<div class="container">
+    <h1>Your meeting should be scheduled on</h1>
+    <p style="font-size:30px" th:text="${bestDate}"/>
+    <p style="font-size:30px" th:text="${bestTime}"/>
 </div>
 
 </body>

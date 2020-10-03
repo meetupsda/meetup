@@ -54,18 +54,19 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <link th:rel="stylesheet" th:href="@{/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.css}"/>
+
+    <link th:rel="stylesheet" th:href="@{/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.css}"/>
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
     <link th:rel="stylesheet" th:href="@{/webjars/font-awesome/5.11.2/css/all.css} "/>
 
 </head>
 
 <body>
+
 <div class="topnav">
     <a class="navbar-brand" href="#">Meetup</a>
     <a th:href="@{/}">Home</a>
     <a th:href="@{/personal-calendar}">Personal Calendar</a>
-    <a th:href="@{/addevent}">Add event</a>
     <a th:href="@{/friends-plans}">Friend's Plans</a>
     <div class="topnav-right" sec:authorize="isAnonymous()">
         <a href="#" th:href="@{/registration}" th:inline="text"><span class="glyphicon glyphicon-user"></span> Sign
@@ -77,44 +78,65 @@
         <a href="#" th:href="@{/logout}" th:inline="text"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
     </div>
 </div>
+<br>
+<br>
+
 <div class="container">
-    <h2 class="mt-5 mb-2">When can you meet? </h2>
+
+
     <div class="row">
         <div class="col-md-4 mt-5">
-            <form method="post" th:object="${event}">
+            <h1>Add new event</h1>
+
+            <form action="#" th:action="@{/saveEvent}" th:object="${event}"
+                  method="POST">
 
                 <div class="form-group">
                     <label for="event">Description:</label>
-                    <input type="text" rows="2" id="event" placeholder="Event description - add your personal notes" autocomplete="off" class="form-control"
+                    <input type="text" rows="2" id="event" placeholder="Event description - add your personal notes" class="form-control" autofocus="autofocus"
                            th:field="*{description}"/>
+                    <td th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Description
+                        Error</td>
                 </div>
+
+
                 <div class="form-group">
                     <label for="date">Start Date & Time:</label>
                     <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
                         <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1"
-                               th:field="*{date}" id="date" placeholder="Start Date & Time"/>
+                               th:field="*{date}" id="date" placeholder="Start Date & Time" autofocus="autofocus"/>
                         <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
                             <div class="input-group-text"><i class="fa fa-calendar-alt"></i></div>
+
                         </div>
                     </div>
+                    <td th:if="${#fields.hasErrors('date')}" th:errors="*{date}">Date
+                        Error</td>
                 </div>
 
                 <div class="form-group">
                     <label for="date2">End Date & Time:</label>
                     <div class="input-group date2" id="datetimepicker2" data-target-input="nearest">
                         <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker2"
-                               th:field="*{date2}" id="date2" placeholder="End Date & Time"/>
+                               th:field="*{date2}" id="date2" placeholder="End Date & Time" autofocus="autofocus"/>
                         <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
                             <div class="input-group-text"><i class="fa fa-calendar-alt"></i></div>
                         </div>
                     </div>
+                    <td th:if="${#fields.hasErrors('date2')}" th:errors="*{date2}">Date
+                        Error</td>
                 </div>
 
-                <button class="btn btn-primary" type="submit">Submit form</button>
+
+
+                <button class="btn btn-primary" type="submit">Submit</button>
+
             </form>
+
         </div>
     </div>
 </div>
+
 
 <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
 <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
@@ -143,6 +165,7 @@
     $('#datetimepicker2').datetimepicker({
         format: 'DD/MM/YYYY h:mm A'
     });
+
 </script>
 </body>
 </html>

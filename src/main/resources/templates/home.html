@@ -55,13 +55,7 @@
     <title>Meetup</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
-    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
 </head>
 <body>
 <div class="topnav">
@@ -78,7 +72,6 @@
     <div class="topnav-logged-in" sec:authorize="isAuthenticated()">
         <a th:href="@{/}">Home</a>
         <a th:href="@{/personal-calendar}">Personal Calendar</a>
-        <a th:href="@{/add-event}">Add event</a>
         <a th:href="@{/friends-plans}">Friend's Plans</a>
         <div class="topnav-right" sec:authorize="isAuthenticated()">
             <a href="#" th:href="@{/profile}" th:inline="text"><span class="glyphicon glyphicon-user"></span>

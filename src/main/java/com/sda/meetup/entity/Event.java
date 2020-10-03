@@ -1,11 +1,6 @@
 package com.sda.meetup.entity;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -24,8 +19,6 @@ public class Event {
     @DateTimeFormat(pattern = "dd/MM/yyyy h:mm a")
     private LocalDateTime date2;
 
-//    @ManyToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "FK_user_id"))
     private Long userId;;
 
     public Event(String description, LocalDateTime date, LocalDateTime date2, User user) {
@@ -33,6 +26,12 @@ public class Event {
         this.date = date;
         this.date2 = date2;
         this.userId = user.getId();
+    }
+
+    public Event(String description, LocalDateTime date, LocalDateTime date2) {
+        this.description = description;
+        this.date = date;
+        this.date2 = date2;
     }
 
     public Event() {
