@@ -66,36 +66,6 @@ public class EventServiceImpl implements EventService{
         this.eventRepository.deleteById(id);
     }
 
-//    public LocalDate findSuitableDate() {
-//        int counter = 0;
-//        int max = 0;
-//        LocalDate suitableDate = LocalDate.of(2020, 01, 01);
-//
-//        List<EventDTO> userEvents = eventRepository
-//                .findAll()
-//                .stream()
-//                .map(entity -> new EventDTO(entity.getId(), entity.getDescription(), entity.getDate(), entity.getDate2(), UserDTO.fromEntity(userRepository.findById(entity.getUserId()).get())))
-//                .collect(Collectors.toList());
-//
-//        for (int i = 0; i < userEvents.size(); i++) {
-//            LocalDate date1 = userEvents.get(i).getDate().toLocalDate();
-//
-//            for (int j = 1; j < userEvents.size(); j++) {
-//                LocalDate date2 = userEvents.get(j).getDate().toLocalDate();
-//                if (date1.equals(date2)) {
-//                    counter = counter + 1;
-//                    if (counter > max) {
-//                        max = counter;
-//                        suitableDate = date1;
-//                    }
-//                } else {
-//                    counter = 0;
-//                }
-//            }
-//        }
-//        return suitableDate;
-//    }
-
     public LocalDate findBestDate() {
 
         List<Event> events = eventRepository.findAll();
