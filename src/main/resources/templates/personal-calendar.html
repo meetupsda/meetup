@@ -1,10 +1,22 @@
-
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        
+
         body {
             background-image: url('https://iili.io/2TBvAQ.jpg');
             background-repeat: no-repeat;
@@ -50,14 +62,15 @@
             text-decoration: none;
             font-size: 15px;
         }
+
+
     </style>
-    <title>Personal calendar</title>
+    <title>Personal Calendar</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
- <!--   <link th:rel="stylesheet" th:href="@{/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.css}/>-->
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
-  <!--  <link th:rel="stylesheet" th:href="@{/webjars/font-awesome/5.11.2/css/all.css} "/>-->
+
 
 </head>
 
@@ -83,45 +96,30 @@
 <br>
 
 <div class="container">
-
     <h1>Your personal calendar</h1>
     <br>
-    <a th:href="@{/showNewEventForm}" class="btn btn-primary btn-sm mb-3">Go back</a>
+    <a th:href="@{/showNewEventForm}" class="btn btn-primary btn-sm mb-3">Add event</a>
+    <table style="background-color: rgba(235, 231, 219, 0.95)" >
 
-   <table border="0" class="table">
-       <thead class="thead-dark">
+
         <tr>
             <th>Description</th>
             <th>Start date</th>
             <th>End date</th>
             <th>Action</th>
         </tr>
-      <tbody>
         <tr th:each="event: ${listEvents}">
-            <div class="form-row">
-            <td><p><strong th:text="${event.description}"></strong></p></td>
 
-            <td><p><strong th:text="${event.date}"></strong></p></td>
+            <th th:text="${event.description}"></th>
+            <th th:text="${event.date}"></th>
+            <th th:text="${event.date2}"></th>
+            <th><a th:href="@{/deleteEvent/{id}(id=${event.id})}" class="btn btn-danger">Delete</a></th>
 
-                <td><p><strong th:text="${event.date2}"></strong></p></td>
+        </tr>
 
-       <!--         <td th:text="${event.description}"></td>
-                <td th:text="${event.date}"></td>
-                <td th:text="${event.date2}"></td>-->
-            <td><a th:href="@{/deleteEvent/{id}(id=${event.id})}" class="btn btn-danger">Delete</a>
-
-            </td>
-                </div>
-
-
- </tr>
-</tbody>
     </table>
 </div>
-</div>
+
 
 </body>
-
 </html>
-
-
